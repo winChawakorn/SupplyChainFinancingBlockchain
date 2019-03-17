@@ -6,6 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const GlobalContext = require('./globalContext.js');
 
 // PaperNet specifc classes
 const Statement = require('./statement.js');
@@ -42,7 +43,7 @@ class StatementContract extends Contract {
    * Define a custom context for commercial statement
   */
   createContext() {
-    return new StatementContext();
+      return new GlobalContext();
   }
 
   /**
@@ -71,18 +72,21 @@ class StatementContract extends Contract {
 
   async payStatement(ctx, id) {
 
-    // let statementKey = Statement.makeKey([id]);
+    console.log('=====finding buy req======')
+    console.log(ctx.buyRequestList.getBuyRequest('0001'))
 
-    // let statement = await ctx.statementList.getStatement(statementKey);
+    let statementKey = Statement.makeKey([id]);
+
+    let statement = await ctx.statementList.getStatement(statementKey);
 
     // Check statement is not REDEEMED
-    // if (statement.isPaid()) {
-    //   throw new Error('Payment ' + id + ' already paid');
-    // }
-    // statement.pay()
+    if (statement.isPaid()) {
+      throw new Error('Payment ' + id + ' already paid');
+    }
+    statement.pay()
 
-    // await ctx.statementList.updateStatement(statement);
-    // return statement.toBuffer();
+    await ctx.statementList.updateStatement(statement);
+    return statement.toBuffer();
   }
 
 }

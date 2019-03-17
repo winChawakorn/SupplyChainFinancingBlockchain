@@ -6,23 +6,12 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const GlobalContext = require('./globalContext.js');
 
 // PaperNet specifc classes
 const BuyRequest = require('./buyRequest.js');
 const BuyRequestList = require('./buyRequestList.js');
 
-/**
- * A custom context provides easy access to list of all buy request
- */
-class BuyRequestContext extends Context {
-
-    constructor() {
-        super();
-        // All papers are held in a list of papers
-        this.buyRequestList = new BuyRequestList(this);
-    }
-
-}
 
 /**
  * Define commercial paper smart contract by extending Fabric Contract class
@@ -39,7 +28,7 @@ class BuyRequestContract extends Contract {
      * Define a custom context for commercial paper
     */
     createContext() {
-        return new BuyRequestContext();
+        return new GlobalContext();
     }
 
     /**

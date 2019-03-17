@@ -6,6 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
+const GlobalContext = require('./globalContext.js');
 
 // PaperNet specifc classes
 const Invoice = require('./invoice.js');
@@ -41,7 +42,7 @@ class InvoiceContract extends Contract {
      * Define a custom context for commercial paper
     */
     createContext() {
-        return new InvoiceContext();
+        return new GlobalContext();
     }
 
     /**
@@ -73,17 +74,17 @@ class InvoiceContract extends Contract {
     }
 
     async payInvoice(ctx, id) {
-        // let invoiceKey = Invoice.makeKey([id]);
+        let invoiceKey = Invoice.makeKey([id]);
 
-        // let invoice = await ctx.invoiceList.getInvoice(invoiceKey);
+        let invoice = await ctx.invoiceList.getInvoice(invoiceKey);
 
         // Check invoice is not REDEEMED
-        // if (invoice.isPaid()) {
-        // throw new Error('Payment ' + id + ' already paid');
-        // }
-        // invoice.pay()
+        if (invoice.isPaid()) {
+            throw new Error('Payment ' + id + ' already paid');
+        }
+        invoice.pay()
 
-        // await ctx.invoiceList.updateInvoice(invoice);
+        await ctx.invoiceList.updateInvoice(invoice);
         return invoice.toBuffer();
     }
 }
