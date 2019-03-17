@@ -1,0 +1,11 @@
+roles/buyer/application/node_modules/
+roles/buyer/contract/node_modules/
+roles/buyer/identity/user/
+roles/supplier/application/node_modules/
+roles/supplier/contract/node_modules/
+roles/supplier/identity/user/
+roles/funder/application/node_modules/
+roles/funder/contract/node_modules/
+roles/funder/identity/user/
+package-lock.json
+.vscode
