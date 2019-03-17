@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
  * 1. Select an identity from a wallet
  * 2. Connect to network gateway
  * 3. Access PaperNet network
- * 4. Construct request to issue commercial paper
+ * 4. Construct request to issue statement
  * 5. Submit transaction
  * 6. Process response
  */
@@ -21,6 +21,7 @@ const { FileSystemWallet, Gateway } = require('fabric-network');
 const Statement = require('../contract/lib/statement.js');
 
 // A wallet stores a collection of identities for use
+//const wallet = new FileSystemWallet('../user/isabella/wallet');
 const wallet = new FileSystemWallet('../identity/user/buyer/wallet');
 
 // Main program function
@@ -55,22 +56,22 @@ async function main() {
 
         const network = await gateway.getNetwork('mychannel');
 
-        // Get addressability to commercial paper contract
+        // Get addressability to statement contract
         console.log('Use org.papernet.commercialpaper smart contract.');
 
         const contract = await network.getContract('scfContract', 'org.papernet.commercialpaper');
 
-        // redeem commercial paper
-        console.log('Submit payment to transaction.');
-
-        const payResponse = await contract.submitTransaction('payStatement', '0001');
+        // approve statement
+        console.log('Submit statement approve transaction.');
+        // id, funder, buyer, supplier, product, amount, price, dueDate
+        const approveResponse = await contract.submitTransaction('approve', '0001');
 
         // process response
-        console.log('Process payment transaction response.');
+        console.log('Process approve transaction response.');
 
-        let payment = Statement.fromBuffer(payResponse);
+        let statement = Statement.fromBuffer(approveResponse);
 
-        console.log(`${payment.buyer} pay to funder : ${payment.id} successfully payment with ${payment.price} to ${payment.funder}`);
+        console.log(`${statement.funder} statement : ${statement.id} successfully send to ${statement.buyer}`);
         console.log('Transaction complete.');
 
     } catch (error) {
@@ -88,11 +89,11 @@ async function main() {
 }
 main().then(() => {
 
-    console.log('pay program complete.');
+    console.log('Issue program complete.');
 
 }).catch((e) => {
 
-    console.log('pay program exception.');
+    console.log('Issue program exception.');
     console.log(e);
     console.log(e.stack);
     process.exit(-1);

@@ -16,6 +16,7 @@ class Invoice extends State {
     constructor(obj) {
         super(Invoice.getClass(), [obj.id]);
         Object.assign(this, obj);
+        this.paid = false;
     }
 
     static fromBuffer(buffer) {
@@ -30,11 +31,11 @@ class Invoice extends State {
     }
 
     pay() {
-        this.pay = true;
+        this.paid = true;
     }
 
     isPaid() {
-        return this.pay
+        return this.paid
     }
 
     /**

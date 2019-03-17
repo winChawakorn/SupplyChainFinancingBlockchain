@@ -12,7 +12,7 @@ const BuyRequest = require('./buyRequest.js');
 class BuyRequestList extends StateList {
 
     constructor(ctx) {
-        super(ctx, 'org.papernet.commercialpaperlist');
+        super(ctx, 'org.papernet.commercialpaperlist.buyreq');
         this.use(BuyRequest);
     }
 
