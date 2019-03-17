@@ -52,8 +52,9 @@ class BuyRequestContract extends Contract {
         console.log('Instantiate the contract');
     }
     // this runs server-side
-    async issue(ctx, id, buyer, supplier, product, amount) {
+    async issueBuyRequest(ctx, id, buyer, supplier, product, amount) {
         // create an instance of the buyRequest
+        console.log('====== issue in buyRequestContract')
         let buyRequest = BuyRequest.createInstance(id, buyer, supplier, product, amount);
 
         // Add the paper to the list of all similar buy request in the ledger world state

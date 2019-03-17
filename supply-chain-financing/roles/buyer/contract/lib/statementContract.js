@@ -55,11 +55,12 @@ class StatementContract extends Contract {
     console.log('Instantiate the contract');
   }
 
-  async issue(ctx, id, funder, buyer, supplier, product, amount, price, dueDate) {
+  async issueStatementContract(ctx, id, funder, buyer, supplier, product, amount, price, dueDate) {
     // let invoiceKey = Invoice.makeKey([invoiceId]);
     // let invoice = await ctx.invoiceList.getInvoice(invoiceKey);
     // create an instance of the statement
     // id, funder, buyer, supplier, product, amount, price, dueDate
+    console.log('====== issue in statementContract')
     let statement = Statement.createInstance(id, funder, buyer, supplier, product, amount, price, dueDate);
 
     // Add the paper to the list of all similar buy request in the ledger world state
@@ -69,7 +70,7 @@ class StatementContract extends Contract {
     return statement.toBuffer();
   }
 
-  async payStatement(ctx, id) {
+  async payStatement(ctx, id, funder, buyer, supplier, product, amount, price, dueDate) {
 
     // let statementKey = Statement.makeKey([id]);
 
@@ -82,7 +83,7 @@ class StatementContract extends Contract {
     // statement.pay()
 
     // await ctx.statementList.updateStatement(statement);
-    // return statement.toBuffer();
+    return { id, funder, buyer, supplier, product, amount, price, dueDate };
   }
 
 }

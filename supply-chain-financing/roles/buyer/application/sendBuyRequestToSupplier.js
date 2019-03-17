@@ -64,14 +64,14 @@ async function main() {
         // issue buyer request
         console.log('Submit buyer request transaction.');
 
-        const issueResponse = await contract.submitTransaction('issue', '0001', 'Buyer', 'Supplier', 'Product', '100');
+        const issueResponse = await contract.submitTransaction('issueBuyRequest', '0001', 'Buyer', 'Supplier', 'Product', '100');
 
         // process response
         console.log('Process buyer request transaction response.');
 
         let request = buyRequest.fromBuffer(issueResponse);
 
-        console.log(`${request.buyer} : ${request.id} successfully send buy request to ${request.seller}`);
+        console.log(`${request.buyer} : ${request.id} successfully send buy request to ${request.supplier}`);
         console.log('Transaction complete.');
 
     } catch (error) {

@@ -5,8 +5,8 @@ docker-compose -f ../supply-chain-financing/roles/buyer/configuration/cli/docker
 # docker-compose -f ../supply-chain-financing/roles/supplier/configuration/cli/docker-compose.yml up -d
 # docker-compose -f ../supply-chain-financing/roles/funder/configuration/cli/docker-compose.yml up -d
 
-# ttab '../supply-chain-financing/roles/buyer/configuration/cli/monitordocker.sh net_basic'
-# sleep 5
+ttab '../supply-chain-financing/roles/buyer/configuration/cli/monitordocker.sh net_basic'
+sleep 5
 
 # install buyRequestContract
 docker exec cliBuyer peer chaincode install -n buyRequestContract -v 0 -p /opt/gopath/src/github.com/contract -l node

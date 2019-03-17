@@ -34,7 +34,7 @@ async function main() {
     try {
 
         // Specify userName for network access
-        const userName = 'User1@org3.example.com';
+        const userName = 'User1@org1.example.com';
 
         // Load connection profile; will be used to locate a gateway
         let connectionProfile = yaml.safeLoad(fs.readFileSync('../gateway/networkConnection.yaml', 'utf8'));
@@ -71,7 +71,7 @@ async function main() {
 
         let statement = Statement.fromBuffer(issueResponse);
 
-        console.log(`${statement.funder} statement : ${statement.id} successfully send to ${statement.buyer}`);
+        console.log(`Statement : ${statement.id} successfully send to the buyer`);
         console.log('Transaction complete.');
 
     } catch (error) {

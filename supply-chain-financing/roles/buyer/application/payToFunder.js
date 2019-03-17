@@ -62,8 +62,7 @@ async function main() {
 
         // redeem commercial paper
         console.log('Submit payment to transaction.');
-
-        const payResponse = await contract.submitTransaction('payStatement', '0001');
+        const payResponse = await contract.submitTransaction('payStatement', '0001', 'funder', 'buyer', 'supplier', 'product', '100', '40000', '2020-05-31');
 
         // process response
         console.log('Process payment transaction response.');

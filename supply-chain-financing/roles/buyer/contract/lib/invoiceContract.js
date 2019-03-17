@@ -54,7 +54,7 @@ class InvoiceContract extends Contract {
         console.log('Instantiate the contract');
     }
     // this runs server-side
-    async issue(ctx, id, buyer, supplier, funder, amount) {
+    async issueInvoice(ctx, id, buyer, supplier, funder, amount) {
 
         // let buyRequestKey = BuyRequest.makeKey([id]);
 
@@ -72,7 +72,7 @@ class InvoiceContract extends Contract {
         return invoice.toBuffer();
     }
 
-    async payInvoice(ctx, id) {
+    async payInvoice(ctx, id, buyer, supplier, funder, product, amount, price) {
         // let invoiceKey = Invoice.makeKey([id]);
 
         // let invoice = await ctx.invoiceList.getInvoice(invoiceKey);
@@ -84,7 +84,8 @@ class InvoiceContract extends Contract {
         // invoice.pay()
 
         // await ctx.invoiceList.updateInvoice(invoice);
-        return invoice.toBuffer();
+        // return invoice.toBuffer();
+        return { id, buyer, supplier, funder, product, amount, price }
     }
 }
 

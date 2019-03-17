@@ -18,7 +18,7 @@ SPDX-License-Identifier: Apache-2.0
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { FileSystemWallet, Gateway } = require('fabric-network');
-const Invoice = require('../contract/lib/paper.js');
+const Invoice = require('../contract/lib/invoice.js');
 
 // A wallet stores a collection of identities for use
 //const wallet = new FileSystemWallet('../user/isabella/wallet');
@@ -34,7 +34,7 @@ async function main() {
     try {
 
         // Specify userName for network access
-        const userName = 'User1@org2.example.com';
+        const userName = 'User1@org1.example.com';
 
         // Load connection profile; will be used to locate a gateway
         let connectionProfile = yaml.safeLoad(fs.readFileSync('../gateway/networkConnection.yaml', 'utf8'));
