@@ -17,6 +17,7 @@ class State {
     constructor(stateClass, keyParts) {
         this.class = stateClass;
         this.key = State.makeKey(keyParts);
+        console.log('created ' + this.key)
         this.currentState = null;
     }
 

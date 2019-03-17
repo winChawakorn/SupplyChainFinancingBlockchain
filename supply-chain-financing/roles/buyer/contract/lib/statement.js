@@ -16,15 +16,15 @@ class Statement extends State {
   constructor(obj) {
     super(Statement.getClass(), [obj.id]);
     Object.assign(this, obj);
-    this.pay = false;
+    this.paid = false;
   }
 
   pay() {
-    this.pay = true;
+    this.paid = true;
   }
 
   isPaid() {
-    return this.pay
+    return this.paid
   }
 
   static fromBuffer(buffer) {

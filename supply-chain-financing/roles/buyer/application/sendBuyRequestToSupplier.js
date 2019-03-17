@@ -59,12 +59,14 @@ async function main() {
         // Get addressability to buyer request contract
         console.log('Use org.papernet.commercialpaper smart contract.');
 
-        const contract = await network.getContract('buyRequestContract', 'org.papernet.commercialpaper');
+        const contract = await network.getContract('scfContract', 'org.papernet.commercialpaper');
 
         // issue buyer request
         console.log('Submit buyer request transaction.');
 
-        const issueResponse = await contract.submitTransaction('issue', '0001', 'Buyer', 'Supplier', 'Product', '100');
+        const issueResponse = await contract.submitTransaction('issueBuyRequest', '0001', 'Buyer', 'Supplier', 'Product', '100');
+
+        // await contract.submitTransaction('issueStatement', '0001', 'funder', 'buyer', 'supplier', 'product', '100', '40000', '2020-05-31');
 
         // process response
         console.log('Process buyer request transaction response.');
