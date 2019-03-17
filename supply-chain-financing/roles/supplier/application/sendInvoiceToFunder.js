@@ -18,7 +18,7 @@ SPDX-License-Identifier: Apache-2.0
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { FileSystemWallet, Gateway } = require('fabric-network');
-const CommercialPaper = require('../contract/lib/paper.js');
+const Invoice = require('../contract/lib/paper.js');
 
 // A wallet stores a collection of identities for use
 //const wallet = new FileSystemWallet('../user/isabella/wallet');
@@ -34,8 +34,7 @@ async function main() {
     try {
 
         // Specify userName for network access
-        // const userName = 'isabella.issuer@magnetocorp.com';
-        const userName = 'User1@org1.example.com';
+        const userName = 'User1@org2.example.com';
 
         // Load connection profile; will be used to locate a gateway
         let connectionProfile = yaml.safeLoad(fs.readFileSync('../gateway/networkConnection.yaml', 'utf8'));
@@ -60,19 +59,18 @@ async function main() {
         // Get addressability to commercial paper contract
         console.log('Use org.papernet.commercialpaper smart contract.');
 
-        const contract = await network.getContract('papercontract', 'org.papernet.commercialpaper');
+        const contract = await network.getContract('invoiceContract', 'org.papernet.commercialpaper');
 
-        // issue commercial paper
-        console.log('Submit commercial paper issue transaction.');
-
-        const issueResponse = await contract.submitTransaction('issue', 'MagnetoCorp', '00001', '2020-05-31', '2020-11-30', '5000000');
+        // sendInvoice commercial paper
+        console.log('Submit commercial paper sendInvoice transaction.');
+        const sendInvoiceResponse = await contract.submitTransaction('issue', '0001', 'buyer', 'supplier', 'funder', '100');
 
         // process response
-        console.log('Process issue transaction response.');
+        console.log('Process sendInvoice transaction response.');
 
-        let paper = CommercialPaper.fromBuffer(issueResponse);
+        let invoice = Invoice.fromBuffer(sendInvoiceResponse);
 
-        console.log(`${paper.issuer} commercial paper : ${paper.paperNumber} successfully issued for value ${paper.faceValue}`);
+        console.log(`${invoice.supplier} commercial invoice : ${invoice.id} successfully send invoice to ${invoice.funder}`);
         console.log('Transaction complete.');
 
     } catch (error) {

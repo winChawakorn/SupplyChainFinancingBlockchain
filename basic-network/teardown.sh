@@ -7,17 +7,28 @@
 # Exit on first error, print all commands.
 set -e
 
-# Shut down the Docker containers for the system tests.
-docker rm -f logspout
-docker rm -f cliBuyer
+# remove chaincode docker images
+docker rm -f $(docker ps -aq)
+docker rmi $(docker images 'dev-*' -q)
 
-docker-compose -f docker-compose.yml kill && docker-compose -f docker-compose.yml down -v
+# Shut down the Docker containers for the system tests.
+docker-compose -f docker-compose.yml kill && docker-compose -f docker-compose.yml down --remove-orphans -v
 
 # remove the local state
 rm -f ~/.hfc-key-store/*
 
+# Remove everythinggggggggggg
+docker rm -f logspout
+docker rm -f cliBuyer
+docker rm -f cliFunder
+docker rm -f cliSupplier
+
+docker-compose -f ../supply-chain-financing/roles/buyer/configuration/cli/docker-compose.yml down --remove-orphans -v
+docker-compose -f ../supply-chain-financing/roles/supplier/configuration/cli/docker-compose.yml down --remove-orphans -v
+docker-compose -f ../supply-chain-financing/roles/funder/configuration/cli/docker-compose.yml down --remove-orphans -v
+
 # remove chaincode docker images
-docker rm $(docker ps -aq)
-docker rmi $(docker images dev-* -q)
+docker rm -f $(docker ps -aq)
+docker rmi $(docker images 'dev-*' -q)
 
 # Your system is now clean

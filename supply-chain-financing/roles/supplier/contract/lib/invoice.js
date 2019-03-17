@@ -11,22 +11,30 @@ const State = require('../ledger-api/state.js');
  * CommercialPaper class extends State class
  * Class will be used by application and smart contract to define a paper
  */
-class BuyRequest extends State {
+class Invoice extends State {
 
     constructor(obj) {
-        super(BuyRequest.getClass(), [obj.id]);
+        super(Invoice.getClass(), [obj.id]);
         Object.assign(this, obj);
     }
 
     static fromBuffer(buffer) {
         console.log('buffer is')
         console.log(Buffer.from(JSON.parse(buffer)).toString('utf-8'))
-        
-        return BuyRequest.deserialize(Buffer.from(JSON.parse(buffer)));
+
+        return Invoice.deserialize(Buffer.from(JSON.parse(buffer)));
     }
 
     toBuffer() {
         return Buffer.from(JSON.stringify(this));
+    }
+
+    pay() {
+        this.pay = true;
+    }
+
+    isPaid() {
+        return this.pay
     }
 
     /**
@@ -34,15 +42,15 @@ class BuyRequest extends State {
      * @param {Buffer} data to form back into the object
      */
     static deserialize(data) {
-        return State.deserializeClass(data, BuyRequest);
+        return State.deserializeClass(data, Invoice);
     }
 
     /**
      * Factory method to create a commercial paper object
      */
-    
-    static createInstance(id, buyer, supplier, product, amount) {
-        return new BuyRequest({ id, buyer, supplier, product, amount });
+
+    static createInstance(id, buyer, supplier, funder, product, amount, price) {
+        return new Invoice({ id, buyer, supplier, funder, product, amount, price });
     }
 
     static getClass() {
@@ -50,4 +58,4 @@ class BuyRequest extends State {
     }
 }
 
-module.exports = BuyRequest;
+module.exports = Invoice;
