@@ -70,7 +70,14 @@ async function main() {
 
         let invoice = Invoice.fromBuffer(sendInvoiceResponse);
 
-        console.log(`${invoice.supplier} commercial invoice : ${invoice.id} successfully send invoice to ${invoice.funder}`);
+        // console.log(`${invoice.supplier} commercial invoice : ${invoice.id} successfully send invoice to ${invoice.funder}`);
+        console.log('----------------------');
+        console.log('function: issueInvoice');
+        const keys = Object.keys(invoice);
+        keys.forEach(key => {
+            console.log(`${key}:`, invoice[key]);
+        });
+        console.log('----------------------');
         console.log('Transaction complete.');
 
     } catch (error) {

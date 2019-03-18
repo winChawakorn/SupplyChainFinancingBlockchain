@@ -56,7 +56,6 @@ class StateList {
         let key = this.ctx.stub.createCompositeKey(this.name, state.getSplitKey());
         let data = State.serialize(state);
         await this.ctx.stub.putState(key, data);
-        // console.log(State.getCurrentState())
     }
 
     /** Stores the class for future deserialization */

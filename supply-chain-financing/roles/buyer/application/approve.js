@@ -71,7 +71,14 @@ async function main() {
 
         let statement = Statement.fromBuffer(approveResponse);
 
-        console.log(`${statement.funder} statement : ${statement.id} successfully send to ${statement.buyer}`);
+        // console.log(`${statement.funder} statement : ${statement.id} successfully send to ${statement.buyer}`);
+        console.log('----------------------');
+        console.log('function: approve');
+        const keys = Object.keys(statement);
+        keys.forEach(key => {
+            console.log(`${key}:`, statement[key]);
+        });
+        console.log('----------------------');
         console.log('Transaction complete.');
 
     } catch (error) {

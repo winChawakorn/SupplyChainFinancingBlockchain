@@ -75,6 +75,7 @@ async function main() {
 
         // console.log(`${request.buyer} : ${request.id} successfully send buy request to ${request.supplier}`);
         console.log('----------------------');
+        console.log('function: issueByRequest');
         const keys = Object.keys(request);
         keys.forEach(key => {
             console.log(`${key}:`, request[key]);

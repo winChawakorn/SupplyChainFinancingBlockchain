@@ -16,15 +16,14 @@ class Statement extends State {
   constructor(obj) {
     super(Statement.getClass(), [obj.id]);
     Object.assign(this, obj);
-    this.pay = false;
   }
 
   pay() {
-    this.pay = true;
+    this.paid = true;
   }
 
   isPaid() {
-    return this.pay
+    return this.paid
   }
 
   static fromBuffer(buffer) {
@@ -47,7 +46,7 @@ class Statement extends State {
    * Factory method to create a commercial paper object
    */
   static createInstance(id, funder, buyer, supplier, product, amount, price, dueDate) {
-    return new Statement({ id, funder, buyer, supplier, product, amount, price, dueDate });
+    return new Statement({ id, funder, buyer, supplier, product, amount, price, dueDate, paid: false });
   }
 
   static getClass() {

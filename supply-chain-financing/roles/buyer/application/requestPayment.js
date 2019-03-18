@@ -70,7 +70,14 @@ async function main() {
 
         let requestPayment = Statement.fromBuffer(payResponse);
 
-        console.log(`${requestPayment.buyer} pay to funder : ${requestPayment.id} successfully requestPayment with ${requestPayment.price} to ${requestPayment.funder}`);
+        // console.log(`${requestPayment.buyer} pay to funder : ${requestPayment.id} successfully requestPayment with ${requestPayment.price} to ${requestPayment.funder}`);
+        console.log('----------------------');
+        console.log('function: requestPayment');
+        const keys = Object.keys(requestPayment);
+        keys.forEach(key => {
+            console.log(`${key}:`, requestPayment[key]);
+        });
+        console.log('----------------------');
         console.log('Transaction complete.');
 
     } catch (error) {
