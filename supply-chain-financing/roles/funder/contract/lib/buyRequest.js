@@ -19,9 +19,6 @@ class BuyRequest extends State {
     }
 
     static fromBuffer(buffer) {
-        console.log('buffer is')
-        console.log(Buffer.from(JSON.parse(buffer)).toString('utf-8'))
-        
         return BuyRequest.deserialize(Buffer.from(JSON.parse(buffer)));
     }
 

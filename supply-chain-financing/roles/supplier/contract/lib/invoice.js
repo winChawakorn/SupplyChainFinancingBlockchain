@@ -30,11 +30,11 @@ class Invoice extends State {
     }
 
     pay() {
-        this.pay = true;
+        this.paid = true;
     }
 
     isPaid() {
-        return this.pay
+        return this.paid
     }
 
     /**
@@ -50,7 +50,7 @@ class Invoice extends State {
      */
 
     static createInstance(id, buyer, supplier, funder, product, amount, price) {
-        return new Invoice({ id, buyer, supplier, funder, product, amount, price });
+        return new Invoice({ id, buyer, supplier, funder, product, amount, price, paid: false });
     }
 
     static getClass() {

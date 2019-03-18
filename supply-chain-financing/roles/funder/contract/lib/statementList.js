@@ -12,7 +12,7 @@ const Statement = require('./statement.js');
 class StatementList extends StateList {
 
   constructor(ctx) {
-    super(ctx, 'org.papernet.commercialpaperlist');
+    super(ctx, 'org.papernet.commercialpaperlist.statement');
     this.use(Statement);
   }
 

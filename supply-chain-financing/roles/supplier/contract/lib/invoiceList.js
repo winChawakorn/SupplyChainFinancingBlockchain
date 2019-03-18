@@ -12,7 +12,7 @@ const Invoice = require('./invoice.js');
 class InvoiceList extends StateList {
 
     constructor(ctx) {
-        super(ctx, 'org.papernet.commercialpaperlist');
+        super(ctx, 'org.papernet.commercialpaperlist.invoice');
         this.use(Invoice);
     }
 
