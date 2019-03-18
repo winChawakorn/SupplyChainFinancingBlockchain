@@ -2,8 +2,8 @@
 ./start.sh
 
 docker-compose -f ../supply-chain-financing/roles/buyer/configuration/cli/docker-compose.yml up -d
-# docker-compose -f ../supply-chain-financing/roles/supplier/configuration/cli/docker-compose.yml up -d
-# docker-compose -f ../supply-chain-financing/roles/funder/configuration/cli/docker-compose.yml up -d
+docker-compose -f ../supply-chain-financing/roles/supplier/configuration/cli/docker-compose.yml up -d
+docker-compose -f ../supply-chain-financing/roles/funder/configuration/cli/docker-compose.yml up -d
 
 ttab '../supply-chain-financing/roles/buyer/configuration/cli/monitordocker.sh net_basic'
 sleep 5
